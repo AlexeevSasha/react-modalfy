@@ -8,11 +8,11 @@
   }
 
   @if $value == openBackdrop {
-    animation: openBackdrop 0.3s ease-out;
+    animation: openBackdrop 0.3s ease-in-out;
   }
 
   @if $value == closeBackdrop {
-    animation: closeBackdrop 0.3s ease-out forwards;
+    animation: closeBackdrop 0.3s ease-in-out forwards;
   }
 }
 

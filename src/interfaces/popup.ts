@@ -1,6 +1,6 @@
 import { MutableRefObject, ReactElement } from "react";
 
-type PopupT = Map<string, ReactElement>;
+export type PopupT = Map<string, ReactElement>;
 
 export interface IRootPopup {
   drawer: PopupT;
