@@ -1,7 +1,7 @@
 import { PopupEvent } from "@/utils/events/popuEvent";
 import { PopupEventNames } from "@/interfaces/popupEventNames";
 import { generateId } from "@/helpers/generateId";
-import { IModal } from "@/interfaces/modal";
+import { IModal, IModalOptions } from "@/interfaces/modal";
 import { ReactElement } from "react";
 
 class ModalEvent extends PopupEvent<IModal> {
@@ -9,8 +9,8 @@ class ModalEvent extends PopupEvent<IModal> {
     super();
   }
 
-  open(element: ReactElement, details?: Omit<IModal, "id" | "children">) {
-    this.emit(PopupEventNames.OPEN_MODAL, { id: generateId(), ...details, children: element });
+  open(element: ReactElement, options?: IModalOptions) {
+    this.emit(PopupEventNames.OPEN_MODAL, { id: generateId(), ...options, children: element });
   }
 
   close(id: string) {

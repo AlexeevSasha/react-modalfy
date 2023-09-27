@@ -12,16 +12,16 @@ export const useModal = ({ previous, setPopupsCb }: IPopupParam) => {
         popups: previous.current["modal"],
         setPopups: setPopupsCb,
       }),
-    [previous],
+    [],
   );
 
   useEffect(() => {
-    modalEvent.on(PopupEventNames.OPEN_MODAL, modal.add);
-    modalEvent.on(PopupEventNames.CLOSE_MODAL, modal.delete);
+    modalEvent.on(PopupEventNames.OPEN_MODAL, modal.handlerAdd);
+    modalEvent.on(PopupEventNames.CLOSE_MODAL, modal.handlerRemove);
 
     return () => {
-      modalEvent.off(PopupEventNames.OPEN_MODAL, modal.add);
-      modalEvent.off(PopupEventNames.CLOSE_MODAL, modal.delete);
+      modalEvent.off(PopupEventNames.OPEN_MODAL, modal.handlerAdd);
+      modalEvent.off(PopupEventNames.CLOSE_MODAL, modal.handlerRemove);
     };
   }, []);
 };
