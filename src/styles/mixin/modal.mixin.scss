@@ -1,18 +1,9 @@
-@mixin popup($value) {
+@mixin modal($value) {
   @if $value == openModal {
     animation: openModal 0.3s ease-out;
   }
-
   @if $value == closeModal {
     animation: closeModal 0.3s ease-out forwards;
-  }
-
-  @if $value == openBackdrop {
-    animation: openBackdrop 0.3s ease-in-out;
-  }
-
-  @if $value == closeBackdrop {
-    animation: closeBackdrop 0.3s ease-in-out forwards;
   }
 }
 
@@ -36,26 +27,6 @@
 
   to {
     transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes openBackdrop {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 0.4;
-  }
-}
-
-@keyframes closeBackdrop {
-  from {
-    opacity: 0.4;
-  }
-
-  to {
     opacity: 0;
   }
 }

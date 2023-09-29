@@ -1,4 +1,4 @@
-import { PopupEventNames } from "@/interfaces/popupEventNames";
+import { PopupEventNames } from "@/common/interfaces/popupEventNames";
 
 export class PopupEvent<T> {
   private eventTarget: EventTarget;

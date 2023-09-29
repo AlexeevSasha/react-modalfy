@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
-import { IPopupParam } from "@/interfaces/popup";
-import { ActionModal } from "@/utils/actionPopup/actionModal";
-import { modalEvent } from "@/utils/events/modalEvent";
-import { PopupEventNames } from "@/interfaces/popupEventNames";
+import { ActionModal } from "@/module/modal/utils/actionModal";
+import { modalEvent } from "@/module/modal/utils/modalEvent";
+import { IPopupParam } from "@/common/interfaces/popup";
+import { PopupEventNames } from "@/common/interfaces/popupEventNames";
 
 export const useModal = ({ previous, setPopupsCb }: IPopupParam) => {
   const modal = useMemo(

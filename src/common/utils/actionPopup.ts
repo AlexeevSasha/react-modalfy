@@ -1,4 +1,4 @@
-import { IPopupParam, IRootPopup, PopupT } from "@/interfaces/popup";
+import { IPopupParam, IRootPopup, PopupT } from "@/common/interfaces/popup";
 
 export interface IActionPopupParams {
   type: keyof IRootPopup;

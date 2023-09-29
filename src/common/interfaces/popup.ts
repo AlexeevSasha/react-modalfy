@@ -11,3 +11,11 @@ export interface IPopupParam {
   previous: MutableRefObject<IRootPopup>;
   setPopupsCb: (name: keyof IRootPopup, popup: PopupT) => void;
 }
+
+export interface IPopupOptions {
+  closePrevious?: boolean;
+  closeBackdropClick?: boolean;
+  callbackAfterClose?: () => void;
+  callbackBackdropClick?: () => void;
+  callbackAnimationEnd?: () => void;
+}

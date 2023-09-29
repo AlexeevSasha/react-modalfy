@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { usePrevious } from "@/hooks/usePrevious";
-import { IPopupParam, IRootPopup } from "@/interfaces/popup";
-import { useModal } from "@/hooks/useModal";
+import { usePrevious } from "@/common/hooks/usePrevious";
+import { useModal } from "@/module/modal/hooks/useModal";
+import { useDrawer } from "@/module/drawer/hooks/useDrawer";
+import { IPopupParam, IRootPopup } from "@/common/interfaces/popup";
 
 export const PopupContainer = () => {
   const [popups, setPopups] = useState<IRootPopup>({ drawer: new Map(), modal: new Map() });
@@ -13,6 +14,7 @@ export const PopupContainer = () => {
   }, []);
 
   useModal({ setPopupsCb, previous });
+  useDrawer({ setPopupsCb, previous });
 
   const render = useMemo(
     () =>

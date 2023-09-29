@@ -1,7 +1,8 @@
-import { ActionPopup, IActionPopupParams } from "@/utils/actionPopup/actionPopup";
-import { IModal } from "@/interfaces/modal";
-import { Modal } from "@/components/modal/Modal";
-import styles from "@/components/modal/modal.module.scss";
+import { ActionPopup, IActionPopupParams } from "@/common/utils/actionPopup";
+import { Modal } from "@/module/modal/components/Modal";
+import cls from "@/module/modal/components/modal.module.scss";
+import clsPopup from "@/styles/popup.module.scss";
+import { IModal } from "@/module/modal/interfaces/modal";
 
 export class ActionModal extends ActionPopup<IModal> {
   constructor(params: IActionPopupParams) {
@@ -14,7 +15,7 @@ export class ActionModal extends ActionPopup<IModal> {
     for (const [id] of this.popups) {
       const modals = document.querySelector(`[data-id="modalfy-modal-${id}"]`);
       [...modals.children].forEach((el, i) => {
-        el.classList.add(!i ? styles.contentClose : styles.backdropClose);
+        el.classList.add(!i ? cls.contentClose : clsPopup.backdropClose);
       });
     }
     this.popups.clear();
