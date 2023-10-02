@@ -1,4 +1,4 @@
-import { IPopupParam, IRootPopup, PopupT } from "@/common/interfaces/popup";
+import { IPopupParam, IRootPopup, PopupCloseT, PopupT } from "@/common/interfaces/popup";
 
 export interface IActionPopupParams {
   type: keyof IRootPopup;
@@ -6,14 +6,20 @@ export interface IActionPopupParams {
   setPopups: IPopupParam["setPopupsCb"];
 }
 
-export class ActionPopup<T extends { id: string }> {
-  private readonly _popups: PopupT;
-  private readonly type: keyof IRootPopup;
-  protected readonly setPopups: IPopupParam["setPopupsCb"];
+interface Params extends IActionPopupParams {
+  remove: (id: string) => void;
+}
 
-  constructor({ type, setPopups, popups }: IActionPopupParams) {
+export class ActionPopup {
+  private readonly _popups: Params["popups"];
+  protected readonly setPopups: Params["setPopups"];
+  private readonly type: Params["type"];
+  private readonly remove: Params["remove"];
+
+  constructor({ setPopups, popups, type, remove }: Params) {
     this._popups = popups;
     this.setPopups = setPopups;
+    this.remove = remove;
     this.type = type;
   }
 
@@ -21,8 +27,22 @@ export class ActionPopup<T extends { id: string }> {
     return this._popups;
   }
 
-  handlerRemove({ detail }: { detail: T }) {
-    this.popups.delete(detail.id);
-    this.setPopups(this.type, this.popups);
+  protected removeAll() {
+    for (const [id] of this.popups) {
+      this.remove(id);
+    }
+    this.popups.clear();
+  }
+
+  handlerRemove({ detail }: { detail: { id: PopupCloseT } }) {
+    const id = detail.id || Array.from(this.popups.keys()).pop();
+    if (id === "all") {
+      this.removeAll();
+    } else {
+      this.remove(id);
+      this.popups.delete(id);
+    }
+    const map = this.popups;
+    setTimeout(() => this.setPopups(this.type, map), 240);
   }
 }

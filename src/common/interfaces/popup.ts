@@ -19,3 +19,5 @@ export interface IPopupOptions {
   callbackBackdropClick?: () => void;
   callbackAnimationEnd?: () => void;
 }
+
+export type PopupCloseT = string | "all";

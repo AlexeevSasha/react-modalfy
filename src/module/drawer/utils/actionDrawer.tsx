@@ -4,22 +4,19 @@ import clsPopup from "@/styles/popup.module.scss";
 import { IDrawer } from "@/module/drawer/interfaces/drawer";
 import { Drawer } from "@/module/drawer/components/Drawer";
 
-export class ActionDrawer extends ActionPopup<IDrawer> {
+export class ActionDrawer extends ActionPopup {
   constructor(params: IActionPopupParams) {
-    super(params);
+    super({ ...params, remove: (id) => this.removeById(id) });
     this.handlerAdd = this.handlerAdd.bind(this);
     this.handlerRemove = this.handlerRemove.bind(this);
   }
 
-  private removeAll() {
-    for (const [id] of this.popups) {
-      const modals = document.querySelector(`[data-id="modalfy-drawer-${id}"]`);
-      [...modals.children].forEach((el) => {
-        const position = el.getAttribute("data-position");
-        el.classList.add(position ? cls[position + "Close"] : clsPopup.backdropClose);
-      });
-    }
-    this.popups.clear();
+  protected removeById(id: string) {
+    const modals = document.querySelector(`[data-id="modalfy-drawer-${id}"]`);
+    [...modals.children].forEach((el) => {
+      const position = el.getAttribute("data-position");
+      el.classList.add(position ? cls[position + "Close"] : clsPopup.backdropClose);
+    });
   }
 
   private add(details: IDrawer) {

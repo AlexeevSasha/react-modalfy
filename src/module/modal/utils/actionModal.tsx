@@ -4,21 +4,18 @@ import cls from "@/module/modal/components/modal.module.scss";
 import clsPopup from "@/styles/popup.module.scss";
 import { IModal } from "@/module/modal/interfaces/modal";
 
-export class ActionModal extends ActionPopup<IModal> {
+export class ActionModal extends ActionPopup {
   constructor(params: IActionPopupParams) {
-    super(params);
+    super({ ...params, remove: (id) => this.removeById(id) });
     this.handlerAdd = this.handlerAdd.bind(this);
     this.handlerRemove = this.handlerRemove.bind(this);
   }
 
-  private removeAll() {
-    for (const [id] of this.popups) {
-      const modals = document.querySelector(`[data-id="modalfy-modal-${id}"]`);
-      [...modals.children].forEach((el, i) => {
-        el.classList.add(!i ? cls.contentClose : clsPopup.backdropClose);
-      });
-    }
-    this.popups.clear();
+  private removeById(id: string) {
+    const modals = document.querySelector(`[data-id="modalfy-modal-${id}"]`);
+    [...modals.children].forEach((el, i) => {
+      el.classList.add(!i ? cls.contentClose : clsPopup.backdropClose);
+    });
   }
 
   private add(details: IModal) {
