@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
-import { drawerEvent } from "@/module/drawer/utils/drawerEvent";
 import { PopupContainer } from "@/PopupContainer";
+import { modalEvent } from "@/module/modal/utils/modalEvent";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -11,7 +11,7 @@ const Test1 = () => {
 const Test = (props) => {
   console.log(props);
   return (
-    <div onClick={() => drawerEvent.open(<Test1 />, { closePrevious: true, position: "left" })} style={{ background: "white", padding: "20px" }}>
+    <div onClick={() => modalEvent.open(<Test1 />, { closePrevious: true })} style={{ background: "white", padding: "20px" }}>
       новая а
     </div>
   );
@@ -21,11 +21,14 @@ root.render(
   <div>
     <div
       onClick={() =>
-        drawerEvent.open(
-          <div onClick={() => drawerEvent.open(<Test />, { position: "top" })} style={{ background: "white", padding: "20px" }}>
+        modalEvent.open(
+          <div onClick={() => modalEvent.open(<Test />)} style={{ background: "white", padding: "20px" }}>
             test
           </div>,
-          { position: "bottom" },
+          {
+            closeBackdropClick: true,
+            callbackAfterClose: () => console.log(5),
+          },
         )
       }
     >

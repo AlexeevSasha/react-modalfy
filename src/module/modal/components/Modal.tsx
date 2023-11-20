@@ -18,7 +18,7 @@ export const Modal = ({ id, children, ...attr }: IModal) => {
   });
 
   const onBackdropClick = () => {
-    if (attr?.closeBackdropClick !== false) closeModal();
+    attr?.closeBackdropClick && closeModal();
     attr?.callbackBackdropClick?.();
   };
 
